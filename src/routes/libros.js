@@ -38,7 +38,7 @@ router.get('/libros', async (req, res)=>{
 
     const libros = await pool.query('SELECT * FROM libro');
 
-    res.json({libros});
+    res.json(libros);
 });
 
 router.post('/editLibro/:id_libro', async(req, res)=>{

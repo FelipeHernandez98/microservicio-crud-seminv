@@ -41,7 +41,7 @@ router.post('/addArticulo', async(req, res)=>{
 router.get('/articulos', async (req, res)=>{
 
     const articulos = await pool.query('SELECT * FROM articulo');
-    res.json({articulos});
+    res.json(articulos);
 });
 
 router.post('/editArt/:id_articulo', async(req, res)=>{
