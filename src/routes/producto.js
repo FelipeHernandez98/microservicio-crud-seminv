@@ -67,7 +67,7 @@ router.get('/findById/:id', async(req, res)=>{
     if(producto == null){
         res.json(producto);
     }else{
-        msg = 'El usuario no existe'
+        msg = 'El producto no existe'
         res.json(msg);
     }
     
