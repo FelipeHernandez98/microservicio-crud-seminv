@@ -64,7 +64,7 @@ router.get('/findById/:id', async(req, res)=>{
     const {id} = req.params;
     const producto = await pool.query('SELECT * FROM producto WHERE id = ?', [id]);
 
-    if(producto == null){
+    if(producto != null){
         res.json(producto);
     }else{
         msg = 'El producto no existe'
