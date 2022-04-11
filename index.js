@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors');
 
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(require('./src/routes'));
 
-
+app.use(cors());
 app.use('/libros', require('./src/routes/libros'));
 
 
