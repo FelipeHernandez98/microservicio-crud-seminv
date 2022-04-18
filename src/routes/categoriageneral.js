@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../database');
 
 
-router.get('/categoriageneral', async (req, res)=>{
+router.get('/categoriasgeneral', async (req, res)=>{
 
     try{
         const categoria = await pool.query('SELECT * FROM categoria_general');
@@ -23,13 +23,13 @@ router.post('/addCategoria', async (req, res)=>{
     }
     console.log(newProd);
     await pool.query('INSERT INTO categoria_general SET ?', [newCat]);
-    res.redirect('categoriageneral');
+    res.redirect('categoriasgeneral');
 });
 
 router.get('/deleteCat/:id', async (req, res)=>{
     const {id} = req.params;
     await pool.query('DELETE FROM categoria_general WHERE id = ?', [id]);
-    res.redirect('/cat/categoriageneral');
+    res.redirect('/cat/categoriasgeneral');
 });
 
 router.post('/editCat/:id', async(req, res)=>{
@@ -39,7 +39,7 @@ router.post('/editCat/:id', async(req, res)=>{
     } = req.body;
 
     await pool.query('UPDATE categoria_general SET descripcion = ?  WHERE id = ?', [descripcion, id]);
-    res.redirect('/cat/categoriageneral');
+    res.redirect('/cat/categoriasgeneral');
 });
 
 router.get('/findById/:id', async(req, res)=>{
