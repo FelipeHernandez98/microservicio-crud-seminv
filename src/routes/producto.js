@@ -62,8 +62,10 @@ router.post('/editProd/:id', async(req, res)=>{
 
 router.get('/findById/:id', async(req, res)=>{
     const {id} = req.params;
-    const producto = await pool.query('SELECT * FROM producto WHERE id = ?', [id]);
+    let producto = await pool.query('SELECT * FROM producto WHERE id = ?', [id]);
 
+    producto = producto[0];
+    
     if(producto != null){
         res.json(producto);
     }else{

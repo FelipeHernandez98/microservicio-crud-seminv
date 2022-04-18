@@ -4,7 +4,8 @@
   "description": "Microservicio para CRUD de libros y articulos",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : " nodemon src/index"
   },
   "author": "Andres Felipe Hernandez Caicedo",
   "license": "ISC",
