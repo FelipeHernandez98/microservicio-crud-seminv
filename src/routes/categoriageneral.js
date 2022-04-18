@@ -1,0 +1,61 @@
+const express = require('express');
+const router = express.Router();
+const pool = require('../database');
+
+
+router.get('/categoriageneral', async (req, res)=>{
+
+    try{
+        const categoria = await pool.query('SELECT * FROM categoria_general');
+        res.json(categoria);
+    }catch(e){
+        res.json(e);
+    }
+});
+
+router.post('/addCategoria', async (req, res)=>{
+    const {
+        descripcion
+    } = req.body;
+
+    const newCat ={      
+        descripcion
+    }
+    console.log(newProd);
+    await pool.query('INSERT INTO categoria_general SET ?', [newCat]);
+    res.redirect('categoriageneral');
+});
+
+router.get('/deleteCat/:id', async (req, res)=>{
+    const {id} = req.params;
+    await pool.query('DELETE FROM categoria_general WHERE id = ?', [id]);
+    res.redirect('/cat/categoriageneral');
+});
+
+router.post('/editCat/:id', async(req, res)=>{
+    const {id} = req.params;
+    const {
+        descripcion
+    } = req.body;
+
+    await pool.query('UPDATE categoria_general SET descripcion = ?  WHERE id = ?', [descripcion, id]);
+    res.redirect('/cat/categoriageneral');
+});
+
+router.get('/findById/:id', async(req, res)=>{
+    const {id} = req.params;
+    let categoria = await pool.query('SELECT * FROM categoria_general WHERE id = ?', [id]);
+
+    categoria = categoria[0];
+    
+    if(categoria != null){
+        res.json(categoria);
+    }else{
+        msg = 'La categoria no existe'
+        res.json(msg);
+    }
+    
+});
+
+
+module.exports = router;
