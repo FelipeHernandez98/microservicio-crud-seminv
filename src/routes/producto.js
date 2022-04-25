@@ -75,5 +75,34 @@ router.get('/findById/:id', async(req, res)=>{
     
 });
 
+router.post('/addMasiva', async(req, res)=>{
+    const lista  = req.body;
+    var i = 0;
+    try {
+        while(i < lista.length){
+        
+            const newProd = {
+                nombre : lista[i].nombre,
+                cantidad : lista[i].cantidad,
+                subcategoria : lista[i].subcategoria,
+                fecha : lista[i].fecha,
+                grupo : lista[i].grupo,
+                programa : lista[i].programa,
+                facultad : lista[i].facultad
+            }
+    
+            await pool.query('INSERT INTO producto SET ?', [newProd]);
+            
+            i++;
+        }
+        
+        res.redirect('productos');
+        
+    } catch (error) {
+        console.error(error);
+    }
+
+    
+});
 
 module.exports = router;
