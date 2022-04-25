@@ -59,5 +59,23 @@ router.get('/findById/:id', async(req, res)=>{
     
 });
 
+router.post('/addMasivaCatEsp', async(req, res)=>{
+    const lista = req.body;
+    var i = 0;
+    try {
+        while(i < lista.length){
+            const newCat = {
+                descripcion : lista[i].descripcion,
+                categoria_general : lista[i].categoria_general
+            }
+            await pool.query('INSERT INTO categoria_especifica SET ?', [newCat]);
+            i++;
+        }
+        res.redirect('categoriasespecifica');
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 module.exports = router;

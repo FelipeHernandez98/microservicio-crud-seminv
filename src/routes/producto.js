@@ -99,7 +99,7 @@ router.post('/addMasiva', async(req, res)=>{
         res.redirect('productos');
         
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 
     

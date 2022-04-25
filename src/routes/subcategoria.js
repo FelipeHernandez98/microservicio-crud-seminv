@@ -60,5 +60,23 @@ router.get('/findById/:id', async(req, res)=>{
     
 });
 
+router.post('/addMasivaSub', async(req, res)=>{
+    const lista = req.body;
+    var i = 0;
+    try {
+        while(i<lista.length){
+            const newSub = {
+                descripcion: lista[i].descripcion,
+                categoria_especifica: lista[i].categoria_especifica
+            }
+            await pool.query('INSERT INTO subcategoria_producto SET ?', [newSub]);
+            i++;
+        }
+        res.redirect('subcategorias');
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 module.exports = router;

@@ -21,7 +21,6 @@ router.post('/addCategoria', async (req, res)=>{
     const newCat ={      
         descripcion
     }
-    console.log(newProd);
     await pool.query('INSERT INTO categoria_general SET ?', [newCat]);
     res.redirect('categoriasgeneral');
 });
@@ -56,6 +55,25 @@ router.get('/findById/:id', async(req, res)=>{
     }
     
 });
+
+router.post('/addMasivaCat', async(req, res)=>{
+    const lista = req.body;
+    var i=0;
+    try {
+        while(i<lista.length){
+            const newCat ={
+                descripcion: lista[i].descripcion
+            }
+            await pool.query('INSERT INTO categoria_general SET ?', [newCat]);
+            i++;
+        }
+        res.redirect('categoriasgeneral');
+    } catch (error) {
+        console.log(error);
+    }
+    
+});
+
 
 
 module.exports = router;
