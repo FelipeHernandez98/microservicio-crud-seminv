@@ -76,4 +76,19 @@ router.get('/deleteLib/:id_libro', async(req, res)=>{
     res.redirect('/lib/libros'); 
 });
 
+router.get('/findById/:id', async(req, res)=>{
+    const {id} = req.params;
+    let libro = await pool.query('SELECT * FROM libro WHERE id_libro = ?', [id]);
+
+    libro = libro[0];
+    
+    if(libro != null){
+        res.json(libro);
+    }else{
+        msg = 'El libro no existe'
+        res.json(msg);
+    }
+    
+});
+
 module.exports = router;

@@ -83,4 +83,19 @@ router.get('/deleteArt/:id_articulo', async(req, res)=>{
     res.redirect('/art/articulos'); 
 });
 
+router.get('/findById/:id', async(req, res)=>{
+    const {id} = req.params;
+    let  articulo = await pool.query('SELECT * FROM articulo WHERE id_articulo = ?', [id]);
+
+    articulo = articulo[0];
+    
+    if(articulo != null){
+        res.json(articulo);
+    }else{
+        msg = 'El articulo no existe'
+        res.json(msg);
+    }
+    
+});
+
 module.exports = router;
